@@ -1,5 +1,8 @@
 ﻿using Application.Blogs.Queries.GetList;
+using Application.Commons.Behaviours;
 using Domain.Interfaces;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,7 +22,9 @@ public static class ConfigureService
 		services.AddMediatR(ctg =>
 		{
 			ctg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+			ctg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 		});
+		services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 		return services;
 	}
 
