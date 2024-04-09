@@ -1,5 +1,7 @@
 using Application;
 using Infrastructure;
+using MassTransit;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructureService(builder.Configuration);
